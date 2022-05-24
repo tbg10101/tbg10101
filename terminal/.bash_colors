@@ -1,0 +1,51 @@
+#!/bin/bash
+
+FORE_BLACK='\e[30m'
+FORE_RED='\e[31m'
+FORE_GREEN='\e[32m'
+FORE_YELLOW='\e[33m'
+FORE_BLUE='\e[34m'
+FORE_MAGENTA='\e[35m'
+FORE_CYAN='\e[36m'
+FORE_GRAY_LIGHT='\e[37m'
+FORE_DEFAULT='\e[39m'
+FORE_GRAY='\e[90m'
+FORE_RED_LIGHT='\e[91m'
+FORE_GREEN_LIGHT='\e[92m'
+FORE_YELLOW_LIGHT='\e[93m'
+FORE_BLUE_LIGHT='\e[94m'
+FORE_MAGENTA_LIGHT='\e[95m'
+FORE_CYAN_LIGHT='\e[96m'
+FORE_WHITE='\e[97m'
+
+BACK_BLACK='\e[40m'
+BACK_RED='\e[41m'
+BACK_GREEN='\e[42m'
+BACK_YELLOW='\e[43m'
+BACK_BLUE='\e[44m'
+BACK_MAGENTA='\e[45m'
+BACK_CYAN='\e[46m'
+BACK_GRAY_LIGHT='\e[47m'
+BACK_DEFAULT='\e[49m'
+BACK_GRAY='\e[100m'
+BACK_RED_LIGHT='\e[101m'
+BACK_GREEN_LIGHT='\e[102m'
+BACK_YELLOW_LIGHT='\e[103m'
+BACK_BLUE_LIGHT='\e[104m'
+BACK_MAGENTA_LIGHT='\e[105m'
+BACK_CYAN_LIGHT='\e[106m'
+BACK_WHITE='\e[107m'
+
+DEFAULT_STYLE='\e[0m'
+
+# a shortcut for clearing the line using the current foreground and background colors
+clearLine () {
+	echo -en "\033[2K"
+}
+
+# a shortcut for setting the foreground and background color then clearing the line
+setLineStyle () {
+	echo -en "${1}${2}"
+	
+	clearLine
+}
