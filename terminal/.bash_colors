@@ -46,6 +46,5 @@ clearLine () {
 # a shortcut for setting the foreground and background color then clearing the line
 setLineStyle () {
 	echo -en "${1}${2}"
-	
 	clearLine
 }

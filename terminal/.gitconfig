@@ -1,0 +1,7 @@
+﻿[user]
+	email = tbg10101@gmail.com
+	name = Tristan Bellman-Greenwood
+[push]
+	default = simple
+[core]
+	ignorecase = false
