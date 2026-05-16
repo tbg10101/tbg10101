@@ -1,1 +1,14 @@
-.idea
+# ignore everything
+*
+
+# except these
+!/README.md
+!/.bashrc
+!/.bash_profile
+!/.bash_colors
+!/.gitignore
+!/.gitconfig
+!/.minttrc
+
+# include excepted items in subdirectories
+# !*/
