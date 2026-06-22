@@ -9,6 +9,8 @@
 !/.gitignore
 !/.gitconfig
 !/.minttrc
+!/.claude/
+!/.claude/settings.json
 
 # include excepted items in subdirectories
 # !*/
