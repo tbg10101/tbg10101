@@ -1,4 +1,5 @@
 {
+  "includeCoAuthoredBy": false,
   "permissions": {
     "allow": [
       "Read",
@@ -53,6 +54,7 @@
     ],
     "defaultMode": "acceptEdits"
   },
+  "effortLevel": "medium",
   "theme": "auto",
-  "effortLevel": "medium"
+  "agentPushNotifEnabled": true
 }
