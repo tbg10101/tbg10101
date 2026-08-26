@@ -52,9 +52,15 @@
       "Read(~/.aws/**)",
       "Read(~/.gnupg/**)"
     ],
-    "defaultMode": "acceptEdits"
+    "defaultMode": "auto"
   },
+  "model": "opus[1m]",
+  "enableArtifact": false,
   "effortLevel": "medium",
   "theme": "auto",
+  "editorMode": "normal",
+  "autoCompactEnabled": false,
+  "switchModelsOnFlag": false,
+  "remoteControlAtStartup": true,
   "agentPushNotifEnabled": true
 }

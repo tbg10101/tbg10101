@@ -2,13 +2,16 @@
 #   - bash 4.4.12(3)
 #   - git 2.35.2
 #   - coreutils 8.32
-#   - 
 
 # If not running interactively, don't do anything
 [[ "$-" != *i* ]] && return
 
 # Sources
 source ~/.bash_colors
+
+if [ -f "${HOME}/.unity/env"] then
+  source "/Users/tbg10101/.unity/env"
+fi
 
 # Aliases
 alias ll='ls -al --color=auto'
