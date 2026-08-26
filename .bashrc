@@ -9,7 +9,7 @@
 # Sources
 source ~/.bash_colors
 
-if [ -f "${HOME}/.unity/env"] then
+if [ -f "${HOME}/.unity/env"]; then
   source "/Users/tbg10101/.unity/env"
 fi
 
