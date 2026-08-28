@@ -11,6 +11,7 @@
 !/.minttrc
 !/.claude/
 !/.claude/settings.json
+!/.claude/CLAUDE.md
 
 # include excepted items in subdirectories
 # !*/
