@@ -1,5 +1,4 @@
 {
-  "includeCoAuthoredBy": false,
   "permissions": {
     "allow": [
       "Read",
@@ -56,8 +55,14 @@
   "effortLevel": "medium",
   "theme": "auto",
   "editorMode": "normal",
+  "verbose": false,
   "autoCompactEnabled": false,
   "switchModelsOnFlag": false,
   "remoteControlAtStartup": true,
-  "agentPushNotifEnabled": true
+  "agentPushNotifEnabled": true,
+  "attribution": {
+    "commit": "",
+    "pr": "",
+    "sessionUrl": false
+  }
 }
