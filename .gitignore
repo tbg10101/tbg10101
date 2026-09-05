@@ -13,5 +13,14 @@
 !/.claude/settings.json
 !/.claude/CLAUDE.md
 
+# tackle workflow (orchestrator skill + its agents)
+!/.claude/agents/
+!/.claude/agents/tackle-*.md
+!/.claude/skills/
+!/.claude/skills/tackle/
+!/.claude/skills/tackle/SKILL.md
+!/.claude/skills/tackle/references/
+!/.claude/skills/tackle/references/*.md
+
 # include excepted items in subdirectories
 # !*/
