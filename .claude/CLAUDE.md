@@ -14,3 +14,4 @@ When a task has multiple distinct phases, validate or compile-check at the end o
 
 GUI-launched applications (e.g. an editor or IDE started from a launcher rather than a terminal) inherit neither the shell environment nor a full PATH. For tooling that runs inside such an app, put configuration in a const with an env var as the override (never env-only), and resolve external executables by absolute path with a candidate list plus an override. Files read from the home directory (e.g. ~/.aws) are unaffected.
 
+Two `unity-cli` skills are installed. Always use the bare `unity-cli` (`~/.claude/skills/unity-cli`), never the Unity plugin's `unity:unity-cli` — the plugin's copy lags the CLI and gets test exit codes wrong. Refresh the bare one with `unity skill install claude-code --yes --force`, which tracks the installed binary. The rest of the `unity:*` plugin skills are fine.

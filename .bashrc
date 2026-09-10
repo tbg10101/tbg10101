@@ -19,7 +19,16 @@ alias l='ll'
 alias cd..='cd ..'
 
 # Functions
-# TODO
+update () {
+    brew upgrade && brew upgrade
+    RESULT=$?
+
+    if [ ${RESULT} -ne 0 ]; then
+        exit ${RESULT}
+    fi
+
+    unity upgrade -y && unity skill install claude-code --yes
+}
 
 # PS1 (shamelessly stolen from somewhere but I can't remember any more)
 function timer_now() {
