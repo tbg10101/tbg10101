@@ -42,3 +42,12 @@ to look thorough. If you re-review after fixes, state for each earlier finding
 whether it is resolved, and hold your position if it isn't — the orchestrator
 escalates genuine disagreement to the user, so you don't have to concede to end
 the loop.
+
+## Output
+
+Write your full findings to the path the orchestrator gives you. **Return only a
+digest**: counts by severity, one line per `must-fix`, and any question only the
+user can answer. The orchestrator reads the file when it needs the detail — a
+long return value is paid for twice, once by you and once by its context.
+
+Say "no findings" plainly when that is the answer. A clean bill is a result.

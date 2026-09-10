@@ -17,11 +17,36 @@ that can actually be checked.
    resolve by reading the code is not a question — resolve it.
 3. Ask the user about everything left. Batch the questions into one
    `AskUserQuestion` call (up to 4) where the answers are bounded choices; use
-   plain text for open-ended ones. Ask about at minimum, where unclear:
+   plain text for open-ended ones.
+
+   **Every question leads with a recommended option, marked as such, with the
+   trade-off stated.** That is what makes asking cheap: a question with a
+   defensible default costs a glance, so ask the extra one rather than assuming.
+   A question you cannot recommend an answer to is usually one you have not
+   researched enough yet — go read the code first. Never pad the list with
+   questions that have an obvious answer.
+
+   Ask about at minimum, where unclear:
    - scope boundaries — what is explicitly *not* in this task
    - behaviour under edge cases and failure
    - how it will be verified, including anything only a human can check
    - performance / compatibility constraints
+   - **lifecycle** — what happens when the thing this depends on changes *after*
+     it is built. Most work produces an artifact derived from something else;
+     ask what should happen when that something else is edited, removed or
+     reordered later.
+   - **who initiates** — for anything that mutates authored or user-owned data:
+     automatic, or on demand? This is a workflow preference, never inferable
+     from the code, and expensive to change once built.
+   - **limits and sizing** — the concrete numbers the user already knows and you
+     would otherwise guess: how big, how many, how often.
+
+   **Then draft the phase-5 "Your call" list now, and ask everything on it that
+   does not need code to answer.** Those are the decisions tests and reviewers
+   cannot settle, and every one that survives to phase 5 is a decision made
+   without the only person qualified to make it — often after the code that
+   assumes an answer already exists. Questions about the artifact are the easy
+   ones; the costly misses are about its lifecycle.
 4. Write the definition to the backend (see `task-backends.md`). It must contain:
    - **Summary** — one paragraph
    - **Context / why**
@@ -61,7 +86,8 @@ exists, so they can't be shaped to fit a bug.
 5. Loop: implementor addresses findings → reviewer re-reviews → repeat until the
    reviewer reports no must-fix findings and the implementor has no outstanding
    objections. **Cap: 3 rounds.** On round 3 without convergence, escalate the
-   remaining disagreement to the user.
+   remaining disagreement to the user. Batch findings and re-check with a fresh
+   narrow agent, per phase 4 steps 4-5 — the same cost rules apply here.
 6. Record in the run log: which criteria are covered by which check, and which
    criteria remain `[manual]`/`[review]`.
 
@@ -105,10 +131,28 @@ task definition and is reused verbatim in phase 5.
 2. Spawn all applicable reviewers **in parallel, in a single message**.
 3. Collect findings. Each finding has a severity: `must-fix`, `should-fix`,
    `consider`. Merge duplicates across reviewers, keeping the highest severity.
+   - **Findings go to a file, not through your context twice.** Each reviewer
+     writes `.claude/tackle/runs/<slug>.findings/<reviewer>-r<N>.md` and returns
+     only a digest: counts by severity, and one line per `must-fix`. Read a full
+     file when you need to judge or merge it; hand the implementor the paths.
+     Otherwise every finding is paid for three times — the reviewer writing it,
+     you reading it, you restating it.
 4. Spawn `tackle-implementor` to address them. It must respond to every `must-fix`
    and `should-fix` with either a change or a reasoned rebuttal — silently
    dropping a finding is not allowed.
-5. Re-run validation. Then re-run the reviewers whose findings were addressed.
+   - **Send one batch per round, never one finding at a time.** Every resume
+     re-sends the agent's whole transcript, so a round costs what the agent has
+     accumulated, not what you asked. Hold `consider` items and stragglers for
+     the next batch.
+   - Apply prose-only findings yourself (SKILL.md rule 2) and tell the
+     implementor you did, so it does not redo them.
+   - **Recycle a fat implementor.** Past roughly 150k tokens of accumulated
+     transcript, spawn a fresh one with a written handoff instead of resuming.
+5. Re-run validation. Then re-check the addressed findings — **with a fresh,
+   narrowly-scoped agent given the fix diff and the original finding, not by
+   resuming the reviewer.** A resumed reviewer re-sends its whole history to
+   answer a question about twenty lines. Resume only when the check genuinely
+   needs the reviewer's own prior reasoning, and say why in the run log.
 6. Repeat until no `must-fix` findings remain and the implementor's rebuttals
    are accepted. **Cap: 3 rounds.**
    - Implementor rebuts and reviewer accepts → resolved, log it.
@@ -117,6 +161,11 @@ task definition and is reused verbatim in phase 5.
    - Round 3 ends with open `must-fix` items → escalate.
 7. `consider` findings that nobody acts on are not failures. Carry them into the
    phase 5 packet as "noted, not addressed" so the user can decide.
+   - **Re-entering phase 4 after a phase-5 send-back** runs a *delta* review:
+     only the reviewers whose domain the change actually touches, on the delta
+     rather than the whole diff. Say in the run log and the packet which
+     reviewers did not re-run and why. A send-back is where a run's cost
+     doubles, and it is also where regressions land — scope it, do not skip it.
 8. Once findings are resolved and validation is green, spawn
    `tackle-review-guide` to write the review guide. Give it the final diff, the
    task definition, every reviewer's findings and their resolutions, the

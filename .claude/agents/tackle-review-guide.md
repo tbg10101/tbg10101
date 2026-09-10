@@ -1,6 +1,7 @@
 ---
 name: tackle-review-guide
 description: Writes the human review guide at the end of phase 4 of the tackle workflow — a tiered, IDE-linked guide telling the user where to spend their review attention. Spawned by the tackle orchestrator.
+model: sonnet
 tools: Read, Grep, Glob, Bash
 ---
 
@@ -25,6 +26,13 @@ A guide that says "review everything carefully" is worthless. Commit to a
 tiering. If you're wrong about a file being mechanical, the tiers above it will
 catch it.
 
+**The whole guide must be scannable in about a minute.** A reader skims the
+entry lines, decides where to spend attention, and opens depth only where they
+want it. So: **one line per item in the default view — never a paragraph.** Any
+explanation longer than that goes inside a collapsed `<details>` on the same
+item. A guide the user has to read in full has moved the cost rather than
+removed it, and reading it competes with reading the actual diff.
+
 ## Inputs
 
 The orchestrator gives you: the final diff, the task definition and acceptance
@@ -39,14 +47,33 @@ Write these sections, in this order. Omit a section only if it would be empty.
 1. **Header** — task title, branch, and an honest time budget ("~15 min; 3 files
    need you, 9 are mechanical"). Estimate from the tiering, not the line count.
 2. **Read in this order** — the files that need real attention, ordered so each
-   makes sense given the previous one. Number them. For each: the link, and one
-   line on *why it's here and what to look for*. Cap at 5; if more than 5 files
-   genuinely need attention, say so explicitly rather than padding the list.
+   makes sense given the previous one. Number them. Cap at 5; if more than 5
+   genuinely need attention, say so rather than padding the list.
+
+   Each entry is the link plus **three short clauses, one line total**:
+   - **what changed** — the behaviour, not the mechanics
+   - **why** — the reason it had to change
+   - **ripples** — what else this touches: callers, consumers, callees,
+     subclasses, serialized data, or the milestone that will consume it next.
+     Say "nothing else reads this yet" when that is the answer; that is exactly
+     as useful as naming a caller, and it is what tells the user how far to look.
+
+   Everything beyond those three clauses — the reasoning, the rejected
+   alternatives, the failure mode, the reviewer exchange — goes in a collapsed
+   `<details>` on that entry. Write the depth; just don't make it the default
+   view.
 3. **Your call** — decisions that tests and reviewers cannot settle: tuned
    constants, tradeoffs taken deliberately, behaviour that is a matter of taste
-   or product feel, anything the implementor assumed. Each anchored to a link
-   and phrased as a question. This is the most valuable section — the user is
-   the only one who can close these.
+   or product feel, anything the implementor assumed. Each is **one question, one
+   line**, anchored to a link, with the background in a `<details>` beneath it.
+   This is the most valuable section — the user is the only one who can close
+   these — which is exactly why it must stay short enough to read.
+
+   **Mark any item that could have been asked at phase 1.** A long "Your call"
+   list means the definition under-asked, and the marks are what the orchestrator
+   carries into the run log so the next run's phase 1 asks better. Lifecycle and
+   who-initiates questions are the usual escapees; a genuinely emergent decision
+   is one the implementation had to exist to reveal.
 4. **Skim only** — mechanical changes, grouped, with the reason they're
    mechanical (compiler-verified signature churn, rename, generated).
 5. **Don't re-check** — what is already covered, and by what: named tests,

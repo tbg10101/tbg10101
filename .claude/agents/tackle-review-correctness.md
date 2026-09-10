@@ -46,3 +46,12 @@ found nothing — a clean review is a real result. Never pad.
 On re-review, say for each earlier finding whether it is resolved. If the
 implementor rebutted and you're convinced, say so. If you're not, hold your
 position and explain why — the orchestrator escalates to the user.
+
+## Output
+
+Write your full findings to the path the orchestrator gives you. **Return only a
+digest**: counts by severity, one line per `must-fix`, and any question only the
+user can answer. The orchestrator reads the file when it needs the detail — a
+long return value is paid for twice, once by you and once by its context.
+
+Say "no findings" plainly when that is the answer. A clean bill is a result.

@@ -168,8 +168,16 @@ scripts. It must render correctly with no network and after being moved.
   document, not a dashboard.
 - Give the playtest steps real `<input type="checkbox">` elements. State is not
   persisted; they are for keeping your place during a manual pass.
+- **Depth goes in `<details>`, closed by default.** Native HTML, so it costs no
+  script. Give every one a `<summary>` that says what is inside ("why positional
+  matching", "the reviewer exchange") rather than "more" — a reader decides from
+  the summary whether to open it. The page with everything collapsed is the
+  guide; the expansions are the appendix.
 - Images from `<slug>.assets/` via relative `src`. Never absolute paths.
 - No JavaScript. It buys nothing here and makes the file harder to trust.
 
 The markdown copy carries the same content with plain links, and does not try to
-reproduce the styling.
+reproduce the styling. `<details>`/`<summary>` render natively on GitHub and in
+most viewers, so keep them; where they degrade, they degrade to visible text,
+which is the right failure. Keep the one-line entries one line there too — the
+markdown copy is read on a phone, where verbosity costs most.

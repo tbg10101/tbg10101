@@ -13,7 +13,12 @@ surface decisions to the user.
 
 1. **Never skip a gate.** Gates exist so the user stays in control.
 2. **Never implement functional code yourself.** Delegate to `tackle-implementor`.
-   You may edit the task definition and the run log directly.
+   You may edit the task definition, the run log, and **prose-only changes**
+   directly — documentation files, comments, and docstrings, where no code
+   changes. Reviewer findings that are purely wording are cheaper to apply than
+   to route through a resume. Anything that alters behaviour, including a
+   comment whose absence would change what a reader does, goes to the
+   implementor.
 3. **Never review the work yourself.** Delegate to the reviewer agents. Your
    judgement of the code is not a substitute for a review round.
 4. **Escalate, don't arbitrate.** If two agents disagree on something with no
@@ -130,6 +135,12 @@ Run in parallel in phase 4, each on the full diff:
 
 A project config may add reviewers or mark one not-applicable. Never drop
 `tackle-review-correctness`.
+
+Each agent's model is set in its own frontmatter; `docs`, `performance` and
+`review-guide` run on a cheaper model because their work is convention-matching
+and organising rather than judgement. `correctness`, `validation` and the
+implementor stay on the strong model — they are the ones that catch regressions.
+Override per project in `.claude/tackle.md` if a project's risk sits elsewhere.
 
 After the round converges, `tackle-review-guide` writes the human review guide.
 It is not a reviewer and does not gate — see `references/review-guide.md`.
