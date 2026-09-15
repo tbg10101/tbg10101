@@ -47,8 +47,9 @@ Tools: `mcp__claude_ai_MCP_for_Trello__*`.
   in phases 4–6 as each is satisfied.
 - Open questions and decisions go in **comments** (`add_comment`), so the
   history is preserved. Post the phase-1 answers as a "Decisions" comment.
-- Phase 6 moves the card to the done list (`update_card` with the list id) —
-  ask which list once and record it in `.claude/tackle.md`.
+- Phase 6 moves the card to the **top** of the done list (`update_card` with the
+  list id and `pos: "top"`) — newest-first, so the list reads most-recent-down.
+  Ask which list once and record it in `.claude/tackle.md`.
 - Do not delete or archive cards. Do not create boards.
 - Trello is outward-facing to anyone else on the board: post the definition and
   the close-out comment, but do not narrate every intermediate round there.

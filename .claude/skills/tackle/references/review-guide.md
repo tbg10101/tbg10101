@@ -155,6 +155,13 @@ Rules specific to a review guide:
 One **self-contained** file: inline CSS, no external stylesheets, fonts, or
 scripts. It must render correctly with no network and after being moved.
 
+**Use the canonical stylesheet.** Copy `assets/review-guide.css` from this skill
+**verbatim** into the `<style>` element. Do not re-derive it, restyle it, or
+`<link>` to it — linking breaks the moment the file is moved or sent. It already
+covers both colour schemes, the `.path`/`.tag`/`.meta` classes below, `<details>`
+panels, tables, checkboxes and images. If the guide needs a class it lacks, add
+the class to that file so the next run inherits it.
+
 - **Escape `&` as `&amp;` in every href.** The query string joins `project` and
   `path` with `&`; an unescaped one truncates the URL and the link silently
   opens the wrong thing. This is the easiest bug to introduce here.
@@ -162,10 +169,6 @@ scripts. It must render correctly with no network and after being moved.
   `line - 1` in the URL; show the real number to the reader.
 - Alongside every link, show the plain `path:line` in muted text, so the guide
   is still usable if a link fails or is read as source.
-- Respect `prefers-color-scheme` — light and dark both legible. Reviewers run
-  dark IDEs.
-- Constrain body width (~44em) and use the system font stack. This is a reading
-  document, not a dashboard.
 - Give the playtest steps real `<input type="checkbox">` elements. State is not
   persisted; they are for keeping your place during a manual pass.
 - **Depth goes in `<details>`, closed by default.** Native HTML, so it costs no
