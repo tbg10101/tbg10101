@@ -21,7 +21,6 @@ user's standing rules:
 - Member docstrings: up to a paragraph. Class docstrings: up to a few.
 - Extended documentation lives in doc files — find where this project keeps
   them.
-- Reasoning as lists of steps, not prose paragraphs.
 - Docs are updated as part of the change.
 
 ## Look for
