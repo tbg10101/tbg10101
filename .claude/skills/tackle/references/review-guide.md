@@ -1,72 +1,58 @@
-# Review guide — links and settings
+# Review guide — format, links, and visuals
 
-Written by `tackle-review-guide` at the end of phase 4, to
-`.claude/tackle/runs/<slug>.review-guide.html` — **HTML is the deliverable**,
-opened in a browser. A plain `<slug>.review-guide.md` is written alongside from
-the same content, for reading in a terminal or on a phone. Run state, not
-project source — not committed.
+Written by `tackle-review-guide` at the end of phase 4:
 
-## Why HTML, and why a browser
+- `.claude/tackle/runs/<slug>.review-guide.html` — the deliverable, opened in a
+  browser
+- `<slug>.review-guide.md` — same content, for a terminal or phone
+- `<slug>.assets/` — images and charts, embedded by relative path
 
-Established by testing on 2026-09-04, in this order:
+Run state, not project source; not committed.
 
-1. `jetbrains://` links work when opened by the OS (`open`), and from **a real
-   browser**, which hands unknown schemes to the OS.
-2. They do **not** work from Rider's own Markdown preview, or from an HTML file
-   opened inside Rider. Its embedded browser refuses the scheme — including
-   JetBrains' own. Getting the guide *into* Rider is not the same as getting
-   clickable links there.
+## Why HTML in a browser
 
-So the review workflow is a **browser | IDE split**: guide in a browser window,
-code in Rider. Do not suggest opening the guide inside the IDE for navigation;
-it silently loses every link.
+Tested 2026-09-04:
 
-Images and charts go beside it in `.claude/tackle/runs/<slug>.assets/`, embedded
-with a **relative** path (`![...](<slug>.assets/before.png)`) so the guide and
-its assets move together and render anywhere. Never embed an absolute path or
-link an image out of a temp directory that will be cleared.
+1. `jetbrains://` links work from `open` and from a real browser, which hands
+   unknown schemes to the OS.
+2. They fail from Rider's Markdown preview and from HTML opened inside Rider —
+   its embedded browser refuses the scheme.
+
+So: guide in a browser window, code in the IDE. Never suggest opening the guide
+in the IDE; every link silently dies.
 
 ## Link format by IDE
 
-Set by `ide:` in `.claude/tackle.md`. **Default is `none`** — plain relative
-markdown links plus `path:line`, which work everywhere and need no handler.
-Only opt into an IDE scheme once it has been verified on that machine.
+Set by `ide:` in `.claude/tackle.md`. Default `none`: a plain relative link plus
+`path:line`, which works everywhere.
 
 | `ide:` | Status | Path form | Line base |
 |---|---|---|---|
 | `none` (default) | — | plain relative link | n/a, shown in text |
 | `rider` | **verified** 2026-09-04, Rider 2026.2 | relative to project root, `../` allowed | **0-based** |
 | `jetbrains-<product>` | unverified | assume as Rider | assume as Rider |
-| `vscode` | unverified | `vscode://file/<absolute>:<line>:<col>`, documented as absolute | documented 1-based |
+| `vscode` | unverified | `vscode://file/<absolute>:<line>:<col>` per docs | 1-based per docs |
 
-Unverified means exactly that: do not emit those links until `references/setup.md`
-step 3 has been run and this table updated with the result. Verify by clicking
-**from a browser**, not from inside the IDE.
+Never emit an unverified scheme. Verify first via `setup.md` §3 — clicking from a
+browser, not the IDE — and update this table.
 
 ## Rider / JetBrains
 
-Verified working (Rider 2026.2, installed via JetBrains Toolbox, which registers
-and routes the `jetbrains:` URL scheme):
+Verified on Rider 2026.2 via JetBrains Toolbox, which registers the scheme:
 
 ```
 [BvhBuilder.cs:88](jetbrains://rider/navigate/reference?project=<name>&path=<relative>:<line-1>)
 ```
 
-Three rules, each established by testing — do not "fix" them:
+Each rule was established by testing; don't "fix" them:
 
-1. **`path` must be relative to the IDE project root.** Absolute paths are
-   rejected with "The URI could not be opened". Paths may escape the root with
-   `../`, which is required whenever the code under review sits outside it.
-2. **The line number is 0-based.** Requesting `:88` puts the caret on line 89.
-   Emit `line - 1`, and keep the *displayed* text 1-based so it matches the
-   editor gutter.
-3. **`project` is the `.sln` basename**, not the repository name.
-
-Intended use: guide open in one Rider split, code in the other.
+1. **`path` is relative to the IDE project root.** Absolute paths fail with "The
+   URI could not be opened". Use `../` for code outside the root.
+2. **The line is 0-based.** `:88` lands on line 89. Emit `line - 1`; display the
+   1-based number.
+3. **`project` is the `.sln` basename**, not the repo name.
 
 ## Per-project settings
-
-In `.claude/tackle.md`:
 
 ```yaml
 ide: rider                    # none (default) | rider | jetbrains-<product> | vscode
@@ -74,113 +60,83 @@ ide_project: capsulecolliders64-test
 ide_project_root: Examples~/capsulecolliders64-test
 ```
 
-If unset, try to derive them once and offer to record them:
+If unset, derive once and offer to record:
 
-- Rider's recent projects list at
-  `~/Library/Application Support/Rider*/options/recentSolutions.xml` holds the
-  `.sln` path. Its basename is `ide_project`; its directory is `ide_project_root`.
-- Unity packages are the awkward case: Rider opens the *example* project inside
-  `Examples~/`, while the reviewable source is in `Runtime/` above it. The root
-  is the example project; links to library source need `../../`.
-
-`ide: none` → a repo-relative markdown link plus `path:line`. This is the
-default and is never wrong; prefer it over a guessed scheme.
+- Rider's `~/Library/Application Support/Rider*/options/recentSolutions.xml`
+  holds the `.sln` path: basename → `ide_project`, directory →
+  `ide_project_root`.
+- Unity packages: Rider opens the example project under `Examples~/`, while the
+  source is in `Runtime/` above it. The root is the example project; library
+  links need `../../`.
 
 ## Degradation
 
-Always render both forms:
+Always render both forms, so the guide survives a dead scheme, a terminal, or a
+phone:
 
 ```markdown
 1. [BvhBuilder.cs:88](jetbrains://...) — `Runtime/Scripts/Bvh/BvhBuilder.cs:88`
    The pruning pass. The whole change lives here.
 ```
 
-The link is for Rider; the plain path is for reading in a terminal, on a phone,
-or after the guide outlives the checkout. If the scheme ever stops resolving,
-the guide degrades to still-useful instead of unusable.
-
 ## Visuals
 
-A guide is for a human. Where an image or a chart answers a question faster than
-prose, produce one and embed it.
+Produce an image or chart where it answers a question faster than prose.
 
-**The distinction that matters:** these are for *the user to look at and judge*.
-They are not evidence for an agent to draw conclusions from. The standing rule
-in `~/.claude/CLAUDE.md` — never validate rendering or visual behaviour from a
-capture, ask the user a specific disambiguating question instead — is unchanged.
-A capture in the guide is there so the user has something concrete to answer
-*about*; it is not the guide author deciding the visuals are correct.
+They are for **the user to judge**, not evidence for an agent. The
+`~/.claude/CLAUDE.md` rule stands: never validate rendering from a capture. A
+capture gives the user something concrete to answer about.
 
 ### Unity render captures
 
-Where a change affects anything visible, the Unity MCP server can capture the
-game or scene view (`mcp__unity-editor-mcp__capture_game_view`,
-`capture_scene_view`, `screenshot`). Embed the image next to the playtest step
-it belongs to, and caption it with **what to look at**, not what you concluded.
+- Tools: `mcp__unity-editor-mcp__capture_game_view`, `capture_scene_view`,
+  `screenshot`.
+- Embed next to the playtest step it belongs to. Caption with **what to look
+  at**, never a verdict.
+  - Good: "Scene view, 5000 colliders. Is the gizmo density near the top-right
+    cluster the pruning you expected?"
+  - Bad: "Rendering is correct."
+- Before/after pairs from the same camera, base commit vs. change. If you
+  couldn't match them, say so.
+- Each capture costs a play-mode round trip (timing in the project config
+  Notes). Capture only the views that matter.
 
-- Good: "Scene view after the change, 5000 colliders. Look at the gizmo density
-  near the top-right cluster — is that the pruning you expected?"
-- Bad: "Rendering is correct."
+### Charts
 
-A before/after pair is worth far more than either alone. Capture the same view
-from the same camera position on the base commit and after the change; say
-explicitly if you could not, so the user doesn't read a difference into two
-shots that aren't comparable.
+For benchmarks, allocation counts, complexity across sizes, before/after
+timings. **Invoke the `dataviz` skill before writing chart code.**
 
-Capturing costs a play-mode round trip on the Unity main thread — see the
-project's config Notes for the timing. Do it once, deliberately, for the views
-that matter.
-
-### Data visualizations
-
-Benchmark results, allocation counts, complexity across input sizes, and
-before/after timings are all easier to judge as a chart than a table of numbers.
-When the change touches performance and there are numbers to show, plot them.
-
-**Invoke the `dataviz` skill before writing any chart code** — it covers palette,
-form, and accessibility, and produces something consistent rather than ad hoc.
-
-Rules specific to a review guide:
-
-- Always plot **before and after together**. A single bar is not reviewable.
-- Label the axis units and say how many runs the numbers came from.
-- Benchmark numbers are only comparable on the same machine in the same session
-  — state that on the chart, so a number is never read as an absolute claim.
-- If the change is not about performance, skip this. A chart of irrelevant
-  numbers is noise that costs review attention, which is the one thing the
-  guide exists to protect.
+- Always plot before and after together.
+- Label axis units and the number of runs.
+- State that numbers are comparable only on the same machine and session.
+- Skip charts when the change isn't about performance; irrelevant numbers cost
+  review attention.
 
 ## Writing the HTML
 
-One **self-contained** file: inline CSS, no external stylesheets, fonts, or
-scripts. It must render correctly with no network and after being moved.
+One self-contained file: inline CSS, no external stylesheets, fonts, scripts,
+or network.
 
-**Use the canonical stylesheet.** Copy `assets/review-guide.css` from this skill
-**verbatim** into the `<style>` element. Do not re-derive it, restyle it, or
-`<link>` to it — linking breaks the moment the file is moved or sent. It already
-covers both colour schemes, the `.path`/`.tag`/`.meta` classes below, `<details>`
-panels, tables, checkboxes and images. If the guide needs a class it lacks, add
-the class to that file so the next run inherits it.
+**Copy `assets/review-guide.css` verbatim into `<style>`.** Don't re-derive,
+restyle, or `<link>` it. If a class is missing, add it to that file so later
+runs inherit it.
 
-- **Escape `&` as `&amp;` in every href.** The query string joins `project` and
-  `path` with `&`; an unescaped one truncates the URL and the link silently
-  opens the wrong thing. This is the easiest bug to introduce here.
-- **Line numbers are 0-based in the href, 1-based in the link text.** Emit
-  `line - 1` in the URL; show the real number to the reader.
-- Alongside every link, show the plain `path:line` in muted text, so the guide
-  is still usable if a link fails or is read as source.
-- Give the playtest steps real `<input type="checkbox">` elements. State is not
-  persisted; they are for keeping your place during a manual pass.
-- **Depth goes in `<details>`, closed by default.** Native HTML, so it costs no
-  script. Give every one a `<summary>` that says what is inside ("why positional
-  matching", "the reviewer exchange") rather than "more" — a reader decides from
-  the summary whether to open it. The page with everything collapsed is the
-  guide; the expansions are the appendix.
-- Images from `<slug>.assets/` via relative `src`. Never absolute paths.
-- No JavaScript. It buys nothing here and makes the file harder to trust.
+- **Escape `&` as `&amp;` in every href.** An unescaped `&` truncates the query
+  and the link silently opens the wrong thing.
+- Line numbers: 0-based in the href, 1-based in the text.
+- Show plain `path:line` (class `path`) beside every link.
+- **Never type item numbers in HTML.** `<ol>` numbers its items; a typed "1."
+  inside an `<li>` renders as "1. 1.". Use `<ol start="N">` to continue a
+  sequence. Only the markdown copy types numbers.
+- Playtest steps get real `<input type="checkbox">` elements (state not
+  persisted) inside an `<ol>`, which keeps its numbers.
+- Depth goes in `<details>`, closed by default. Each `<summary>` names its
+  contents ("why positional matching", "the reviewer exchange"), never "more".
+  The fully collapsed page is the guide.
+- Images from `<slug>.assets/` by relative `src`. Never absolute paths or temp
+  directories.
+- No JavaScript.
 
-The markdown copy carries the same content with plain links, and does not try to
-reproduce the styling. `<details>`/`<summary>` render natively on GitHub and in
-most viewers, so keep them; where they degrade, they degrade to visible text,
-which is the right failure. Keep the one-line entries one line there too — the
-markdown copy is read on a phone, where verbosity costs most.
+The markdown copy has the same content with plain links and no styling. Keep
+`<details>`/`<summary>` — they render on GitHub and degrade to visible text.
+Keep one-line entries one line; it is read on a phone.

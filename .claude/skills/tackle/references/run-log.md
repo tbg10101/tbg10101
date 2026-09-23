@@ -1,11 +1,11 @@
 # Run log
 
-Path: `.claude/tackle/runs/<slug>.md`, created on run start.
+Path: `.claude/tackle/runs/<slug>.md`, created at run start.
 
-It exists so a fresh session can pick the run up with
-`/tackle resume <slug>` without re-deriving anything, and so `status` is
-cheap. Write it after every phase transition, every gate, and every escalation.
-Keep it terse — it is state, not prose.
+- Lets `/tackle resume <slug>` continue without re-deriving anything, and makes
+  `status` cheap.
+- Written after every phase transition, gate, and escalation.
+- State, not prose — keep it terse.
 
 ```markdown
 # Run: <slug>
@@ -34,12 +34,11 @@ Keep it terse — it is state, not prose.
 - <finding or question, who raised it, current state>
 ```
 
-On `resume`: read this file, re-read the task definition, re-run validation to
-confirm the recorded state is still true, then continue from `Phase:`. If the
-working tree has changed since the recorded state, say so before continuing.
+**On `resume`:** read this file and the task definition, re-run validation to
+confirm the recorded state, then continue from `Phase:`. If the working tree
+changed since, say so first.
 
-`.claude/tackle/runs/` holds everything a run produces: this log, the review
-guide, its `<slug>.assets/` images, and the `<slug>.base/` snapshot for non-git
-projects. It is run state, not project source — suggest gitignoring it unless
-the user wants the history committed. Captures accumulate, so mention the
-directory at close-out if it has grown.
+`.claude/tackle/runs/` holds everything a run produces: this log, findings, the
+review guide and its `<slug>.assets/`, and the `<slug>.base/` snapshot for
+non-git projects. Suggest gitignoring it unless the user wants the history.
+Mention its size at close-out if captures have piled up.

@@ -1,11 +1,6 @@
-/* Canonical review-guide stylesheet. Inline this VERBATIM into the <style> element of
-   <slug>.review-guide.html — do not re-derive it, and do not <link> to this file (the guide
-   must survive being moved and be readable with no network).
-
-   Every rule reads a custom property, and both schemes are defined at :root before any rule
-   uses them. Do not add hard-coded colours below: an earlier hand-written sheet put its
-   @media (prefers-color-scheme: dark) block first, so later equal-specificity rules such as
-   `code { background: #f3f3f3 }` silently overrode it and dark mode shipped half-themed. */
+/* Canonical review-guide stylesheet. Inline VERBATIM into <style>; never <link> it.
+   Colours only via the custom properties below — a hard-coded colour in a later rule
+   silently overrides the dark scheme. */
 
 :root {
   color-scheme: light dark;
@@ -79,8 +74,8 @@ th { background: var(--th); }
 .tag { display: inline-block; font-size: 0.78em; padding: 0.05em 0.4em; border-radius: 3px;
   background: var(--tag-bg); }
 
-/* playtest steps: real checkboxes, state not persisted */
+/* playtest steps: real checkboxes, state not persisted. <ol> keeps its numbers; <ul> drops bullets. */
 input[type="checkbox"] { margin-right: 0.5em; }
-li:has(> input[type="checkbox"]) { list-style: none; margin-left: -1.2em; }
+ul > li:has(> input[type="checkbox"]) { list-style: none; margin-left: -1.2em; }
 
 img { max-width: 100%; height: auto; border: 1px solid var(--panel-border); border-radius: 4px; }
