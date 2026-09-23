@@ -57,6 +57,9 @@
   },
   "model": "opus[1m]",
   "enableArtifact": false,
+  "enabledPlugins": {
+    "unity@claude-plugins-official": true
+  },
   "effortLevel": "medium",
   "theme": "auto",
   "editorMode": "normal",
@@ -65,7 +68,9 @@
   "switchModelsOnFlag": false,
   "remoteControlAtStartup": true,
   "agentPushNotifEnabled": true,
-  "enabledPlugins": {
-    "unity@claude-plugins-official": true
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "high"
+    }
   }
 }
