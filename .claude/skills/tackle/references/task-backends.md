@@ -3,6 +3,9 @@
 Set by `task_backend:` in `.claude/tackle.md`. If absent: a Trello card URL/id in
 the invocation → `trello`, otherwise `markdown`.
 
+The definition must stand alone: no run-folder paths (`run-log.md`). Put the
+content itself in it (playtest script, contracts, noted-not-addressed findings).
+
 ## markdown
 
 - Path: `task_path` from config, else `docs/tasks/<slug>.md`.

@@ -38,6 +38,9 @@ user's standing rules:
   touched, including renames and changed defaults.
 - **Changelog / task definition** — flag a warranted entry if the project keeps
   one.
+- **Run-folder references** — any path into `.claude/tackle/runs/` in committed
+  code, comments, or docs. `must-fix`: it dangles once the run folder is
+  cleaned up.
 
 ## Discipline
 

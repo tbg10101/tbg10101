@@ -35,7 +35,7 @@ and comes to you, at any phase.
 **Where things go**
 
 - Task definition: `docs/tasks/<slug>.md` or a Trello card
-- Run state, findings, guide, captures: `.claude/tackle/runs/`
-- Review guide: `<slug>.review-guide.html` — **open in a browser**, not the IDE
+- Everything a run writes: `.claude/tackle/runs/<slug>/`
+- Review guide: `<slug>/review-guide.html` — **open in a browser**, not the IDE
 
 **Not done for you:** pushes, tags, releases, merges.

@@ -1,6 +1,12 @@
 # Run log
 
-Path: `.claude/tackle/runs/<slug>.md`, created at run start.
+Path: `<run>/run.md`, created at run start. `<run>` is the run's own folder,
+`.claude/tackle/runs/<slug>/`; every file the run writes goes inside it.
+
+Nothing outside `<run>` may cite it: not the task definition, project docs,
+code, comments, or commit messages. Run folders are local, gitignored and
+disposable, and anything committed or shared outlives them. Carry the content
+itself, or leave it out.
 
 - Lets `/tackle resume <slug>` continue without re-deriving anything, and makes
   `status` cheap.
@@ -38,7 +44,14 @@ Path: `.claude/tackle/runs/<slug>.md`, created at run start.
 confirm the recorded state, then continue from `Phase:`. If the working tree
 changed since, say so first.
 
-`.claude/tackle/runs/` holds everything a run produces: this log, findings, the
-review guide and its `<slug>.assets/`, and the `<slug>.base/` snapshot for
-non-git projects. Suggest gitignoring it unless the user wants the history.
+Layout of `<run>/`:
+
+- `run.md` — this log
+- `findings/<reviewer>-r<N>.md` — reviewer output
+- `review-guide.html`, `review-guide.md`, `assets/` — the phase-4 guide
+- `base/` — the snapshot for non-git projects
+- anything else the run writes (diffs handed to reviewers, playtest scripts) —
+  loose in `<run>/`, never in `runs/` itself
+
+Suggest gitignoring `.claude/tackle/runs/` unless the user wants the history.
 Mention its size at close-out if captures have piled up.

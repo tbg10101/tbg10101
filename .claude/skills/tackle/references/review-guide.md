@@ -2,10 +2,10 @@
 
 Written by `tackle-review-guide` at the end of phase 4:
 
-- `.claude/tackle/runs/<slug>.review-guide.html` — the deliverable, opened in a
+- `<run>/review-guide.html` — the deliverable, opened in a
   browser
-- `<slug>.review-guide.md` — same content, for a terminal or phone
-- `<slug>.assets/` — images and charts, embedded by relative path
+- `<run>/review-guide.md` — same content, for a terminal or phone
+- `<run>/assets/` — images and charts, embedded by relative path
 
 Run state, not project source; not committed.
 
@@ -133,7 +133,7 @@ runs inherit it.
 - Depth goes in `<details>`, closed by default. Each `<summary>` names its
   contents ("why positional matching", "the reviewer exchange"), never "more".
   The fully collapsed page is the guide.
-- Images from `<slug>.assets/` by relative `src`. Never absolute paths or temp
+- Images from `assets/` by relative `src`. Never absolute paths or temp
   directories.
 - No JavaScript.
 

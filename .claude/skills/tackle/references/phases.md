@@ -97,13 +97,13 @@ verbatim in phase 5.
    - It is a working-tree diff; runs make no intermediate commits. If the tree
      was dirty at start, tell the reviewers.
    - **No git:** before phase 3, copy the files the task will touch to
-     `.claude/tackle/runs/<slug>.base/` and diff with `diff -ru`. Log which
+     `<run>/base/` and diff with `diff -ru`. Log which
      files were snapshotted; widen the snapshot if scope grows, or edits
      outside it are invisible to reviewers.
 2. Spawn all applicable reviewers **in parallel, in one message**.
 3. Collect findings — severity `must-fix`, `should-fix`, or `consider`. Merge
    duplicates, keeping the highest severity.
-   - Each reviewer writes `.claude/tackle/runs/<slug>.findings/<reviewer>-r<N>.md`
+   - Each reviewer writes `<run>/findings/<reviewer>-r<N>.md`
      and returns a digest only. Read a file when you need to judge or merge it;
      hand the implementor paths, not restatements.
 4. Spawn `tackle-implementor` to address them. Every `must-fix` and `should-fix`
@@ -131,7 +131,7 @@ verbatim in phase 5.
 9. Once findings are resolved and validation is green, spawn
    `tackle-review-guide` with the final diff, task definition, all findings and
    resolutions, validation output, and project config. It writes
-   `.claude/tackle/runs/<slug>.review-guide.html` plus a markdown copy. Don't
+   `<run>/review-guide.html` plus a markdown copy. Don't
    write it yourself; tiering needs the code read, and you haven't.
 
 ---
