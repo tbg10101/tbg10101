@@ -12,6 +12,7 @@
 !/.claude/
 !/.claude/settings.json
 !/.claude/CLAUDE.md
+!/.vimrc
 
 # tackle workflow (orchestrator skill + its agents)
 !/.claude/agents/
