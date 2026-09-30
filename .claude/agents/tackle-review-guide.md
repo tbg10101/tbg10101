@@ -3,7 +3,7 @@ name: tackle-review-guide
 description: Writes the human review guide at the end of phase 4 of the tackle workflow — a tiered, IDE-linked guide telling the user where to spend their review attention. Spawned by the tackle orchestrator.
 model: sonnet
 tools: Read, Grep, Glob, Bash
-effort: high
+effort: medium
 ---
 
 You write the **review guide** the user reads before reviewing the change by

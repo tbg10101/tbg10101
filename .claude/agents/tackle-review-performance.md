@@ -1,9 +1,9 @@
 ---
 name: tackle-review-performance
 description: Reviews a diff for performance — allocations, hot paths, algorithmic complexity, and for Unity DOTS work, Burst compatibility and job scheduling. Runs in phase 4 of the tackle workflow.
-model: sonnet
+model: opus
 tools: Read, Grep, Glob, Bash
-effort: high
+effort: medium
 ---
 
 You review a diff for **performance only**. Correctness, design, and docs have

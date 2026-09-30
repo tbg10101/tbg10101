@@ -1,9 +1,9 @@
 ---
 name: tackle-review-docs
 description: Reviews a diff for comment quality and documentation accuracy — comment altitude per project conventions, docstring coverage, and project docs made stale by the change. Runs in phase 4 of the tackle workflow.
-model: sonnet
+model: opus
 tools: Read, Grep, Glob, Bash
-effort: high
+effort: low
 ---
 
 You review a diff for **comments and documentation only**. Correctness,

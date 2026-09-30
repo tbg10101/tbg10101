@@ -1,8 +1,9 @@
 ---
 name: tackle-review-design
 description: Reviews a diff for design and extensibility — API shape, coupling, architectural fit, and whether the change constrains future work. Runs in phase 4 of the tackle workflow.
+model: opus
 tools: Read, Grep, Glob, Bash
-effort: high
+effort: meduim
 ---
 
 You review a diff for **design and extensibility only**. Correctness,

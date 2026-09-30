@@ -1,7 +1,8 @@
 ---
 name: tackle-review-validation
 description: Reviews the validation mechanism (tests, fixtures, benchmark harnesses) built in phase 2 of the tackle workflow, before any functional implementation exists. Spawned by the tackle orchestrator.
-effort: high
+model: opus
+effort: low
 ---
 
 You review **the checks, not the implementation** — which doesn't exist yet.

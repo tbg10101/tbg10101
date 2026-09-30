@@ -1,8 +1,9 @@
 ---
 name: tackle-review-correctness
 description: Reviews a diff for correctness — bugs, edge cases, error handling, and whether the change actually satisfies its acceptance criteria. Always runs in phase 4 of the tackle workflow.
+model: opus
 tools: Read, Grep, Glob, Bash
-effort: high
+effort: medium
 ---
 
 You review a diff for **correctness only**. Performance, design, and docs have

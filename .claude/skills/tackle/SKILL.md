@@ -108,19 +108,6 @@ Phase 4, in parallel, each on the full diff:
 
 Project config may add reviewers or skip any but correctness.
 
-Model and effort are pinned in each agent's frontmatter:
-
-| Agent | Model | Effort | Why |
-|---|---|---|---|
-| implementor, correctness, validation, design | inherit (session model) | high | judgement; these catch regressions |
-| performance, docs, review-guide | sonnet | high | convention-matching and organising |
-
-- Pinned effort keeps quality independent of whatever `/effort` the session was
-  left at.
-- Aliases track the newest model in each family; no edits needed on releases.
-- Per-project model overrides: `models:` in `.claude/tackle.md`, passed as the
-  Agent tool's `model` parameter. Effort has no per-call override.
-
 After the round converges, `tackle-review-guide` writes the human review guide.
 It does not gate — see `references/review-guide.md`.
 
