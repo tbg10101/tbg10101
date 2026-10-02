@@ -57,24 +57,24 @@
   },
   "model": "opus[1m]",
   "enableArtifact": false,
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
+  },
   "enabledPlugins": {
     "unity@claude-plugins-official": true
   },
   "effortLevel": "medium",
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "medium"
+    }
+  },
   "theme": "auto",
   "editorMode": "normal",
   "verbose": false,
   "autoCompactEnabled": false,
   "switchModelsOnFlag": false,
   "remoteControlAtStartup": true,
-  "agentPushNotifEnabled": true,
-  "modelSettings": {
-    "claude-opus-5-5": {
-      "effortLevel": "high"
-    }
-  },
-  "statusLine": {
-    "type": "command",
-    "command": "bash ~/.claude/statusline-command.sh"
-  }
+  "agentPushNotifEnabled": true
 }

@@ -15,6 +15,7 @@
 !/.vimrc
 
 # tackle workflow (orchestrator skill + its agents)
+!/.claude/statusline-command.sh
 !/.claude/agents/
 !/.claude/agents/tackle-*.md
 !/.claude/skills/
