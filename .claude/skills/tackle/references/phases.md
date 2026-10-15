@@ -2,6 +2,14 @@
 
 - Compile-check or validate at the end of every phase before starting the next.
 - Write the run log after every phase transition, gate, and escalation.
+- Before every spawn, read `~/.claude/rate-limits.json` (the status line writes
+  it). Subagents can't see the limit and die mid-task when it hits.
+  - `five_hour` or `seven_day` at 75% used or more → don't spawn. Write the run
+    log, stop, and tell the user when the window resets (`resets_at`).
+  - File missing, or `written_at` older than 10 minutes → say the limit can't
+    be read, and carry on.
+  - Tell every implementor to write its report as it goes, so a cut-off run
+    leaves a record.
 
 ---
 

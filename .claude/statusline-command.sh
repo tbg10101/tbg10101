@@ -59,6 +59,13 @@ rate_limit() {
 rate_limit five_hour 5h "↻ " "%H:%M"
 rate_limit seven_day 7d "" "%a"
 
+# Latest rate limits, for tools that cannot see the status line
+limits=$(echo "$input" | jq -c 'select(.rate_limits != null) | {rate_limits, written_at: (now | floor)}')
+if [ -n "$limits" ]; then
+  printf '%s\n' "$limits" > "$HOME/.claude/rate-limits.json.$$" \
+    && mv "$HOME/.claude/rate-limits.json.$$" "$HOME/.claude/rate-limits.json"
+fi
+
 line=""
 for p in "${parts[@]}"; do
   [ -n "$line" ] && line="$line · "
