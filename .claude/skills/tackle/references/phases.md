@@ -2,20 +2,25 @@
 
 - Compile-check or validate at the end of every phase before starting the next.
 - Write the run log after every phase transition, gate, and escalation.
-- Before every spawn, read `~/.claude/rate-limits.json` (the status line writes
-  it). Subagents can't see the limit and die mid-task when it hits.
+- Before every spawn, read usage. Subagents can't see the limit and die
+  mid-task when it hits. Use the first source that works:
+  1. `mcp__ccd_session_mgmt__get_usage` (desktop app; deferred, load with
+     ToolSearch) with `plan.status` `"ok"`. `plan.windows[]`: "5-hour limit"
+     → 5-hour, "Weekly · all models" → weekly; `percentUsed`, `resetsAt`.
+  2. `~/.claude/rate-limits.json` (the CLI status line writes it), if
+     `written_at` is under 10 minutes old. `five_hour` → 5-hour, `seven_day`
+     → weekly; `resets_at`.
+  3. Neither → say the limit can't be read, and carry on.
   - At or over the cap → don't spawn. Write the run log, stop, and tell the
-    user when the window resets (`resets_at`). Caps (% used):
+    user when the window resets. Caps (% used):
 
-    | Spawn | `five_hour` | `seven_day` |
+    | Spawn | 5-hour | weekly |
     |---|---|---|
     | `tackle-review-guide` | 90 | 95 |
     | everything else | 75 | 90 |
 
     The weekly window is several times the 5-hour one in absolute terms, so
     its caps sit higher. The guide is small and the last step before the gate.
-  - File missing, or `written_at` older than 10 minutes → say the limit can't
-    be read, and carry on.
   - Tell every implementor to write its report as it goes, so a cut-off run
     leaves a record.
   - Run any pre-round check the project config lists (e.g. an editor that must
