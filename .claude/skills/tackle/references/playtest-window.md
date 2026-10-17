@@ -6,7 +6,8 @@ of the browser guide, so the user never leaves a full-screen Editor.
 ## Install
 
 - Develop: `"com.10101software.tackle": "file:/Users/<you>/.claude/skills/tackle/unity"`
-- Consume: `https://github.com/tbg10101/tbg10101.git?path=/.claude/skills/tackle/unity#tackle-unity-<version>`
+- Consume: `https://github.com/tbg10101/tbg10101.git?path=/.claude/skills/tackle/unity#<commit sha>`
+  — pin a pushed commit; bump it to pick up changes.
 - Commit the package's `.meta` files; git installs are immutable.
 
 ## `<run>/playtest.json`

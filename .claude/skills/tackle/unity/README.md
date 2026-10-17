@@ -20,7 +20,7 @@ Add one of these to the project's `Packages/manifest.json`:
 
 - Development, from a local checkout:
   `"com.10101software.tackle": "file:/Users/<you>/.claude/skills/tackle/unity"`
-- Consumers, pinned to a release tag:
-  `"com.10101software.tackle": "https://github.com/tbg10101/tbg10101.git?path=/.claude/skills/tackle/unity#tackle-unity-<version>"`
+- Consumers, pinned to a pushed commit:
+  `"com.10101software.tackle": "https://github.com/tbg10101/tbg10101.git?path=/.claude/skills/tackle/unity#<commit sha>"`
 
 Commit the package's `.meta` files: git installs are immutable, so Unity cannot generate them there.
