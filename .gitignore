@@ -25,6 +25,8 @@
 !/.claude/skills/tackle/references/*.md
 !/.claude/skills/tackle/assets/
 !/.claude/skills/tackle/assets/*
+!/.claude/skills/tackle/unity/
+!/.claude/skills/tackle/unity/**
 
 # include excepted items in subdirectories
 # !*/

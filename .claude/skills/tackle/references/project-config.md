@@ -21,6 +21,7 @@ protected_branches: []        # extra regexes, e.g. ['^stable-.*']
 ide: rider                    # none (default) | rider | jetbrains-<product> | vscode
 ide_project: <sln basename>   # IDE links only
 ide_project_root: <dir>       # repo-relative dir containing the .sln
+playtest_window: none         # none (default) | unity — see playtest-window.md
 ---
 
 ## Notes for agents

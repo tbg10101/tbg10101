@@ -1,0 +1,10 @@
+{
+  "name": "com.10101software.tackle",
+  "displayName": "Tackle",
+  "version": "1.0.0",
+  "unity": "6000.0",
+  "description": "Editor window that shows a tackle run's manual playtest steps inside the Unity Editor.",
+  "author": {
+    "name": "Tristan Bellman-Greenwood"
+  }
+}

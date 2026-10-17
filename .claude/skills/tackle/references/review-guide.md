@@ -6,6 +6,7 @@ Written by `tackle-review-guide` at the end of phase 4:
   browser
 - `<run>/review-guide.md` — same content, for a terminal or phone
 - `<run>/assets/` — images and charts, embedded by relative path
+- `<run>/playtest.json` — only with `playtest_window: unity`; see `playtest-window.md`
 
 Run state, not project source; not committed.
 

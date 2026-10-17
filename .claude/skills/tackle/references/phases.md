@@ -165,6 +165,9 @@ Send the review guide HTML as a file with its `open` command. It must be opened
 in a **browser**, not the IDE, or the links break; the intended setup is a
 browser window beside the IDE.
 
+With `playtest_window: unity`, also open `<run>/playtest.json` in the Editor
+(`references/playtest-window.md`). The browser guide still covers code review.
+
 Alongside it, a short packet:
 
 - **What changed** — a short summary, then files with one line each.
