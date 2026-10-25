@@ -16,8 +16,8 @@
 
     | Spawn | 5-hour | weekly |
     |---|---|---|
-    | `tackle-review-guide` | 90 | 95 |
-    | everything else | 75 | 90 |
+    | `tackle-review-guide` | 95 | 95 |
+    | everything else | 85 | 90 |
 
     The weekly window is several times the 5-hour one in absolute terms, so
     its caps sit higher. The guide is small and the last step before the gate.
