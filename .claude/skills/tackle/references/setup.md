@@ -17,6 +17,10 @@ Record each with its confidence:
   `dotnet test`, `npm test`, `cargo test`. Unity usually has none; see
   `project-config.md`.
 - **Build command** — same sources.
+- **Lint** — the project's own linter first: lint config or scripts in the repo
+  (`.eslintrc*`, `ruff`/`flake8` in `pyproject.toml`, `clippy`, `golangci`,
+  analyzer rules in `.editorconfig`). Else an IDE's inspections over MCP if
+  connected — for C#/Unity, Rider's (`rider-mcp`). Neither → `none`.
 - **Default branch** — `git symbolic-ref refs/remotes/origin/HEAD`, else
   whichever of `master`/`main` exists.
 - **IDE** — §2.

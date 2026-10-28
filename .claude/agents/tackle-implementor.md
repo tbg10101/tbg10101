@@ -33,7 +33,9 @@ and why.
 
 1. Read the files before changing them.
 2. Make the change.
-3. Compile-check or validate. Never report a result you didn't observe.
+3. Compile-check or validate, and lint the files you touched if a linter is
+   configured; fix what you introduced. Never report a result you didn't
+   observe.
 4. Iterate against the checks *and* your judgement — green on thin checks isn't
    done. Find the input that breaks it; handle it or flag it.
 5. Grep the docs for names, data-model statements, and workflow steps you

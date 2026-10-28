@@ -25,6 +25,16 @@
     leaves a record.
   - Run any pre-round check the project config lists (e.g. an editor that must
     not be playing). If one fails, tell the user and wait.
+- Lint the changed files wherever validation runs in phases 3–4, using the
+  project's linter (`lint:` in the config; else detect per `setup.md` §1).
+  - Unavailable (tool missing, MCP server not connected) → log it and carry on.
+    Never block on lint.
+  - Keep only what the change introduced: drop `lint_ignore` patterns, and
+    anything the file had at the base commit or an untouched file of the same
+    kind also shows.
+  - Write `<run>/lint-p<phase>r<round>.md`. It goes to the implementor with the
+    findings batch and to every reviewer as an input. New errors are
+    `should-fix`; new warnings are `consider` unless a reviewer raises them.
 
 ---
 

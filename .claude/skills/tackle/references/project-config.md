@@ -12,6 +12,8 @@ trello_board: <board id>      # trello
 trello_done_list: <list id>
 validate: dotnet test         # runs the automated checks
 build: dotnet build           # compile-check, run at phase boundaries
+lint: eslint .                # shell command | rider-mcp | none — unset: detect at run start
+lint_ignore: []               # inspection names that are project-wide noise
 reviewers_add: [security]     # extra agents, named tackle-review-<name>
 reviewers_skip: [performance] # never correctness
 models: {performance: opus}   # per-agent model override: sonnet | opus | haiku | fable
@@ -41,3 +43,8 @@ procedure in Notes and set `validate:` to a short label. Agents follow the saved
 Unity MCP workflow memory for timing and pitfalls (busy-vs-broken bridge
 responses, play-mode delays, silent Burst fallback) rather than inventing their
 own polling.
+
+For lint, prefer `lint: rider-mcp` (`mcp__rider__lint_files` on changed `.cs`
+files) when Rider's MCP server is connected. Unity regenerates its `.csproj`
+files, so `dotnet format` and analyzer builds see a different project than the
+Editor does.
