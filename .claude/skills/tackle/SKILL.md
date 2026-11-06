@@ -1,6 +1,6 @@
 ---
 name: tackle
-description: Run a task end-to-end through a gated define → validate → implement → multi-reviewer → manual-review workflow. Use when the user asks to implement a task, feature, bug fix, or refactor "properly", "with the workflow", or invokes /tackle. Also handles `resume <slug>`, `status`, and `refine` subcommands.
+description: Run a task end-to-end through a gated define → design → validate → implement → multi-reviewer → manual-review workflow. Use when the user asks to implement a task, feature, bug fix, or refactor "properly", "with the workflow", or invokes /tackle. Also handles `resume <slug>`, `status`, and `refine` subcommands.
 ---
 
 # Tackle
@@ -91,6 +91,7 @@ are the user's — name it in the phase-5 packet.
 | Phase | What happens | Gate |
 |---|---|---|
 | 1. Define | Clarify with the user; write definition + acceptance criteria | **User approves** |
+| 1b. Design | `tackle-designer` ⇄ `tackle-review-design`; document the approach, at the length the task needs | **User approves**; a send-back is re-reviewed first |
 | 2. Validate | Build the checks; implementor ⇄ `tackle-review-validation` | On disagreement only |
 | 3. Implement | `tackle-implementor` iterates to green | On disagreement only |
 | 4. Review | Reviewers in parallel; implementor addresses; repeat; `tackle-review-guide` writes the guide | On disagreement or round cap |

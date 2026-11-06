@@ -42,6 +42,9 @@ user's standing rules:
   code, comments, or docs. `must-fix`: it dangles once the run folder is
   cleaned up.
 
+An approved design under `design_path` is a dated record: its line numbers
+aren't stale docs. A wrong statement about what this run built still is.
+
 ## Discipline
 
 Flag what is wrong, missing, or off-altitude — not phrasing you'd change.

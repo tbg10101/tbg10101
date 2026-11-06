@@ -5,7 +5,7 @@ screen. Show real config values if `.claude/tackle.md` exists; say so if not.
 
 ---
 
-**tackle** — run a task through define → validate → implement → review → manual review.
+**tackle** — run a task through define → design → validate → implement → review → manual review.
 
 **Commands**
 
@@ -18,9 +18,10 @@ screen. Show real config values if `.claude/tackle.md` exists; say so if not.
 | `/tackle refine <feedback>` | Change how the workflow behaves. |
 | `/tackle help` | This. |
 
-**Phases** — two gates, marked
+**Phases** — three gates, marked
 
 1. **Define** — clarify, write acceptance criteria, pick the branch → **you approve**
+1b. **Design** — research the approach, document choices and why, design review → **you approve**
 2. **Validate** — build the checks, confirm they fail for the right reason, review them
 3. **Implement** — iterate until validation passes
 4. **Review** — 4 reviewers in parallel, findings addressed, re-validated; review guide written

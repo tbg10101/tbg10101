@@ -14,6 +14,8 @@ you need from them as a marked **question**.
 - Project `CLAUDE.md` and `~/.claude/CLAUDE.md` — they outrank your habits on
   comment altitude, docs, and commits.
 - `.claude/tackle.md`, if present.
+- The approved design, if the run has one. A departure from it is a
+  **question**, not a decision.
 - Enough surrounding code to match its naming, idiom, and comment density.
 
 ## Scope

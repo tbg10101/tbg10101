@@ -30,6 +30,8 @@ content itself in it (playtest script, contracts, noted-not-addressed findings).
 2. `[manual]` … — checked by playtest script below
 3. `[review]` … — checked by `<reviewer>`
 
+## Design
+<!-- link to the design doc -->
 ## Playtest script
 ## Open questions
 ## Decisions
@@ -42,6 +44,8 @@ Tools: `mcp__claude_ai_MCP_for_Trello__*`.
 
 - **Description**: Summary, Context, Scope, Out of scope, Playtest script — same
   structure as above.
+- **Design**: a "Design" section in the description, linking the design doc's
+  repo path.
 - **Acceptance criteria**: a checklist named "Acceptance criteria"
   (`create_checklist`, `add_checkitem`), one tagged item per criterion. Tick with
   `update_checkitem` in phases 4–6.

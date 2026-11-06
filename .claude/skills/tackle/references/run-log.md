@@ -20,7 +20,7 @@ itself, or leave it out.
 - **Backend:** markdown | trello
 - **Base commit:** <sha at run start>
 - **Branch:** <branch> (created by this run: yes | no)
-- **Phase:** 1–6
+- **Phase:** 1, 1b, 2–6
 - **Blocked on:** none | <what the user was asked>
 
 ## Validation
@@ -30,6 +30,7 @@ itself, or leave it out.
 
 ## Phase history
 - P1 approved <date> — decisions: <one line each>
+- P1b rounds: 2, approved <date>
 - P2 rounds: 2, converged
 - P3 <date> — validation green
 - P4 round 1: correctness 2 must-fix, perf 1 should-fix, design 0, docs 1 → addressed
@@ -47,6 +48,7 @@ changed since, say so first.
 Layout of `<run>/`:
 
 - `run.md` — this log
+- `design.md` — the working design, until moved to `design_path`
 - `findings/<reviewer>-r<N>.md` — reviewer output
 - `review-guide.html`, `review-guide.md`, `assets/` — the phase-4 guide
 - `base/` — the snapshot for non-git projects

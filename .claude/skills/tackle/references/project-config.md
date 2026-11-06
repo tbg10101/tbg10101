@@ -17,6 +17,7 @@ lint_ignore: []               # inspection names that are project-wide noise
 reviewers_add: [security]     # extra agents, named tackle-review-<name>
 reviewers_skip: [performance] # never correctness
 models: {performance: opus}   # per-agent model override: sonnet | opus | haiku | fable
+design_path: docs/designs     # where approved designs are moved, repo-relative
 commit: ask                   # ask | never | always — the single phase-6 commit
 branch: auto                  # auto | never — auto branches off protected branches only
 protected_branches: []        # extra regexes, e.g. ['^stable-.*']

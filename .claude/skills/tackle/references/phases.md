@@ -43,6 +43,9 @@
 **Goal:** a definition nobody has to guess at, with checkable acceptance
 criteria.
 
+The definition says what, not how. A choice the user volunteers is recorded as a
+constraint for phase 1b.
+
 1. Read the source: the prompt, the task file, or the Trello card
    (`get_card`, `get_comments`, `get_card_checklists`).
 2. Read enough code to ask informed questions. Anything the code answers is not
@@ -87,6 +90,37 @@ criteria.
 
 ---
 
+## Phase 1b — Design
+
+**Goal:** an approved approach, with its technology choices and reasons, before
+any check or code assumes one. As long as the task needs and no longer: a simple
+objective gets a short design. Don't over-design.
+
+1. Spawn `tackle-designer` with the definition and project config. It researches
+   and writes `<run>/design.md`. Writes nothing else, so it may run while another
+   run holds the working tree or the editor.
+2. Spawn `tackle-review-design` on the document. `reviewers_skip` doesn't apply
+   here.
+3. Loop until no `must-fix` remains and rebuttals are accepted.
+   - **Cap: 3 rounds**, then escalate what's left.
+   - Batching and re-check rules as phase 4 steps 4–5.
+4. **GATE:** send `design.md` with a short summary. The user approves or sends
+   it back.
+   - Sent back → designer revises → design reviewer on the revision → this gate.
+   - A change to the definition → phase 1 gate first.
+5. Once approved, and just before phase 2 starts, move it to
+   `<design_path>/<slug>.md`, with this header, and link it from the task
+   definition (`task-backends.md`). It lands in the run's one commit. Don't move
+   it while another run holds the working tree.
+
+   - **Task:** <link to the card or task file>
+   - **Approved:** <date>
+
+   A record of the approved approach. Line numbers are as of approval, and it
+   isn't maintained after the task closes.
+
+---
+
 ## Phase 2 — Build the validation mechanism
 
 **Goal:** trustworthy checks that exist before the implementation, so they
@@ -113,20 +147,21 @@ verbatim in phase 5.
 
 ## Phase 3 — Implement
 
-1. Spawn `tackle-implementor` with the approved definition, the validation
-   mechanism and how to run it, the project config, and CLAUDE.md conventions.
+1. Spawn `tackle-implementor` with the approved definition and design, the
+   validation mechanism and how to run it, the project config, and CLAUDE.md
+   conventions.
 2. It iterates until validation passes and it is satisfied, then reports
    changes, validation output, assumptions, and omissions.
 3. Re-run validation yourself. Don't take a reported green on trust.
-4. A criterion that proves wrong or infeasible → escalate. Never edit a
-   criterion to match the implementation without the user.
+4. A criterion or design choice that proves wrong or infeasible → escalate. Never
+   edit either to match the implementation without the user.
 
 ---
 
 ## Phase 4 — Multi-reviewer round
 
 1. Produce the diff once (`git diff <base commit>`) and give every reviewer the
-   same diff, task definition, and criteria.
+   same diff, task definition, design, and criteria.
    - It is a working-tree diff; runs make no intermediate commits. If the tree
      was dirty at start, tell the reviewers.
    - **No git:** before phase 3, copy the files the task will touch to
@@ -194,7 +229,8 @@ Alongside it, a short packet:
 
 **GATE.** The user accepts or sends it back:
 
-- behaviour change → phase 3 (phase 1 if the definition changes)
+- behaviour change → phase 3 (phase 1b if the design changes, phase 1 if the
+  definition does)
 - code quality → phase 4
 
 Never verify visual or rendering behaviour from screenshots. Ask the user a
@@ -208,7 +244,8 @@ answer unambiguous.
 1. Update the task: check off criteria, move a Trello card to its done list,
    add an outcome comment.
 2. Grep the project docs for names, data-model statements, and workflow steps
-   the change touched; fix stale ones.
+   the change touched; fix stale ones. Project docs describing the feature link
+   the design doc.
 3. **One** local commit for the whole run, if the user asked or the config
    says to. Short message per `~/.claude/CLAUDE.md`.
 4. Finalise the run log and list what remains for the user.

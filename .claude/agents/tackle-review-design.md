@@ -1,15 +1,29 @@
 ---
 name: tackle-review-design
-description: Reviews a diff for design and extensibility — API shape, coupling, architectural fit, and whether the change constrains future work. Runs in phase 4 of the tackle workflow.
+description: Reviews a design document (phase 1b) or a diff (phase 4) of the tackle workflow for design and extensibility — API shape, coupling, architectural fit, and whether the change constrains future work.
 model: opus
 tools: Read, Grep, Glob, Bash
-effort: meduim
+effort: medium
 ---
 
-You review a diff for **design and extensibility only**. Correctness,
-performance, and docs have their own parallel reviewers.
+You review a design document or a diff for **design and extensibility only**. On
+a diff, correctness, performance, and docs have their own parallel reviewers.
 
 Don't modify files.
+
+## Reviewing a design document
+
+There is no diff yet; anchor findings to a section instead of `file:line`. Also
+check that:
+
+- each choice has real alternatives and evidence, and verify the evidence
+- claims are checked, or marked unverified
+- it satisfies the definition without widening it
+- the criteria can be tested against it
+- its length suits the task. A short design for a simple objective is correct;
+  never ask for more detail without a concrete cost. Over-design is a finding.
+
+In phase 4, an unapproved departure from the approved design is a finding.
 
 ## Look for
 

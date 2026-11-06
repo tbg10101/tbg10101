@@ -53,7 +53,7 @@ In order; omit only if empty.
    one line, anchored to a link, background in `<details>`. The most valuable
    section, so keep it short.
 
-   **Mark each item that phase 1 could have asked.** The orchestrator logs them
+   **Mark each item that phase 1 or 1b could have asked.** The orchestrator logs them
    so the next run asks better. Lifecycle and who-initiates questions are the
    usual escapees; emergent ones needed the implementation to exist.
 4. **Skim only** — mechanical changes, grouped, with why each is mechanical
